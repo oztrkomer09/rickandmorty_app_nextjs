@@ -3,9 +3,11 @@ import Image from "next/image";
 import imageLoader from "@/components/imageLoader";
 import { GetStaticProps, NextPage } from "next";
 import { GetCharacterResults, Character } from "@/types";
+import Link from "next/link";
 
 type Props = {
   characters: Character[];
+  results: GetCharacterResults;
 };
 
 const Home: NextPage<Props> = ({ characters }) => {
@@ -17,21 +19,28 @@ const Home: NextPage<Props> = ({ characters }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-full mx-auto grid grid-cols-3 justify-center items-center">
+      <div className="w-full h-full mx-auto grid grid-cols-3 gap-y-12 justify-center items-center p-4">
         {characters.map((char) => {
           return (
             <div
               key={char.id}
               className="flex flex-col justify-center items-center"
             >
-              {char.name}
-              <Image
-                loader={imageLoader}
-                src={char.image}
-                alt={char.name}
-                width="200"
-                height="200"
-              />
+              <div className="flex flex-col items-center justify-center text-center">
+                <Link href={`characters/${char.id}`}>
+                  <p className=" w-full py-2 font-bold text-blue-600 bg-white border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all">
+                    {char.name}
+                  </p>
+
+                  <Image
+                    loader={imageLoader}
+                    src={char.image}
+                    alt={char.name}
+                    width="200"
+                    height="200"
+                  />
+                </Link>
+              </div>
             </div>
           );
         })}
@@ -42,7 +51,7 @@ const Home: NextPage<Props> = ({ characters }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch("https://rickandmortyapi.com/api/character");
-  const { results }: GetCharacterResults = await res.json();
+  const { results } = await res.json();
 
   return {
     props: {
