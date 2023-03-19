@@ -7,6 +7,12 @@ function CharacterPage({ character }: { character: Character }) {
   return (
     <div className="flex justify-center items-center py-2">
       <div className="flex flex-col justify-center items-center">
+        <Link
+          href={"/"}
+          className="absolute top-2 left-2 bg-purple-600 px-2 py-[18px] rounded-full text-center text-white font-bold hover:bg-purple-900 transition-all"
+        >
+          Home
+        </Link>
         <Image
           loader={imageLoader}
           unoptimized
