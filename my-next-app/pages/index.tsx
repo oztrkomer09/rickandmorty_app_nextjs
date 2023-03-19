@@ -19,7 +19,7 @@ const Home: NextPage<Props> = ({ characters }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-full mx-auto grid grid-cols-3 gap-y-12 justify-center items-center p-4">
+      <div className="w-full h-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-12 justify-center items-center p-4">
         {characters.map((char) => {
           return (
             <div
@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({ characters }) => {
             >
               <div className="flex flex-col items-center justify-center text-center">
                 <Link href={`characters/${char.id}`}>
-                  <p className=" w-full py-2 font-bold text-blue-600 bg-white border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all">
+                  <p className="w-full py-2 font-bold text-blue-600 bg-white border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all">
                     {char.name}
                   </p>
 
